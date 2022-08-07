@@ -36,11 +36,9 @@ To start, let's take a look at your sources of rental income.
     def income(self):
         # I went back through here and changed all the inputs to make it shorter
         # and less redundant 
-
         print("For your response please only use numbers and exclude any special characters ($ . , etc.)\n")
 
         rent = self.user_input('rental', 'income')
-        self.rent_income = rent
         os.system("cls")
         
         while True:
@@ -58,17 +56,16 @@ Please respond with "yes" or "no"\n
                 os.system("cls")
 
                 laundry = self.user_input('laundry', 'services')
-                self.rent_income += laundry
                 os.system("cls")
                 
                 storage = self.user_input('storage', 'fees')
-                self.rent_income += storage
                 os.system("cls")
                 
                 misc = self.user_input('misc. rental', 'income')
-                self.rent_income += misc
                 os.system("cls")
                 
+                self.rent_income = sum([rent, laundry, storage, misc])
+
                 print(f"""
 ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
 \tYour total monthly rental income is ${self.rent_income:.2f}
