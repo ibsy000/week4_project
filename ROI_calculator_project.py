@@ -178,6 +178,11 @@ Please respond with "yes" or "no"\n
 
 
 
+    def summary(self):
+        pass
+
+
+
     def edit():
         pass
     
