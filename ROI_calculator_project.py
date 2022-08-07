@@ -40,51 +40,45 @@ To start, let's take a look at your sources of rental income.
 
         rent = self.user_input('rental', 'income')
         os.system("cls")
-        
-        while True:
 
-            add_rent = input("""
+        add_rent = input("""
 Do you have any additional rental income from laundry services, storage fees, or
 other miscellaneous rental income?
 
 Please respond with "yes" or "no"\n
 """).lower().strip()
+        os.system("cls")
 
-            if add_rent not in {'yes', 'no'}:
 
-                print("I'm sorry that is not a valid response...")
-                os.system("cls")
-                
-            elif add_rent == 'yes':
-                os.system("cls")
+        while add_rent not in {'yes', 'no'}:
 
-                laundry = self.user_input('laundry', 'services')
-                os.system("cls")
-                
-                storage = self.user_input('storage', 'fees')
-                os.system("cls")
-                
-                misc = self.user_input('misc. rental', 'income')
-                os.system("cls")
-                
-                self.rent_income = sum([rent, laundry, storage, misc])
-# ***********FIGURE OUT HOW TO NOT HAVE TO TYPE THIS TWICE************
-                print(f"""
+            add_rent = input('I\'m sorry that is not a valid response...\nPlease respond with "yes" or "no"\n')
+            os.system("cls")
+            
+
+        if add_rent == 'yes':
+            os.system("cls")
+
+            laundry = self.user_input('laundry', 'services')
+            os.system("cls")
+            
+            storage = self.user_input('storage', 'fees')
+            os.system("cls")
+            
+            misc = self.user_input('misc. rental', 'income')
+            os.system("cls")
+            
+
+        elif add_rent == 'no':
+            os.system("cls")
+
+        self.rent_income = sum([rent, laundry, storage, misc])
+
+        print(f"""
 ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
 \tYour total monthly rental income is ${self.rent_income:.2f}
 ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
-                """)
-                break
-
-            elif add_rent == 'no':
-                os.system("cls")
-# ***********FIGURE OUT HOW TO NOT HAVE TO TYPE THIS TWICE************
-                print(f"""
-••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
-\tYour total monthly rental income is ${self.rent_income:.2f}
-••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
-                """)
-                break
+            """)
 
     def expenses(self):
         
@@ -135,8 +129,11 @@ Please respond with "yes" or "no"\n
                 """)
 
     def cash_flow(self):
-        pass
-
+        
+        print("You're almost done! Let's calculate your cash flow...\n")
+        time.sleep(3)
+        print(self.rent_exp)
+        print(self.rent_income)
 
     def coc_return(self):
         pass
@@ -167,5 +164,7 @@ def main():
     calculate.income()
 
     calculate.expenses()
+
+    calculate.cash_flow()
 
 main()
