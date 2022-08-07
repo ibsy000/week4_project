@@ -20,6 +20,7 @@ class ROI:
         self.rent_cashflow = rent_cashflow
         self.rent_coc_return = rent_coc_return
 
+
    
     def intro(self):
         
@@ -31,6 +32,7 @@ rental property.
 To start, let's take a look at your sources of rental income. 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         """)
+
 
 
     def income(self):
@@ -68,17 +70,19 @@ Please respond with "yes" or "no"\n
             misc = self.user_input('misc. rental', 'income')
             os.system("cls")
             
+            self.rent_income = sum([rent, laundry, storage, misc])
 
         elif add_rent == 'no':
             os.system("cls")
 
-        self.rent_income = sum([rent, laundry, storage, misc])
-
+        self.rent_income = rent
         print(f"""
 ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
-\tYour total monthly rental income is ${self.rent_income:.2f}
+\tYour total monthly rental income is: ${self.rent_income:.2f}
 ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
             """)
+
+
 
     def expenses(self):
         
@@ -124,30 +128,45 @@ Please respond with "yes" or "no"\n
 
         print(f"""
 ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
-\tYour total monthly rental expenses is ${self.rent_exp:.2f}
+\tYour total monthly rental expenses is: ${self.rent_exp:.2f}
 ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
                 """)
+
+
 
     def cash_flow(self):
         
         print("You're almost done! Let's calculate your cash flow...\n")
         time.sleep(3)
-        print(self.rent_exp)
-        print(self.rent_income)
+
+        cf_monthly = self.rent_income - self.rent_exp
+        rent_cashflow = cf_monthly * 12
+
+        print(f"""
+••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+\tYour total monthly cashflow is: ${cf_monthly:.2f}
+\tYour total annual cashflow is: ${rent_cashflow:.2f}
+••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+        """)
+        
+
 
     def coc_return(self):
-        pass
+
+        print("You've made it to the final step! Now let's go over your rental property investments.\n")
+
+        down_pymt = self.user_input('down payment', 'initial')
 
 
     def edit():
         pass
     
+    def user_input(self, first_value, frequency = 'monthly', sec_value = 'amount'):
     # I started to realize I'm typing the same input over and over again, I decided
     # to make a method to call the inputs instead and insert the two parameters
     # that change with each question... let's see how it goes
-    def user_input(self, first_value, sec_value = 'amount'):
         
-        question = input(f"How much is your monthly {first_value} {sec_value}?\n")
+        question = input(f"How much is your {frequency} {first_value} {sec_value}?\n")
         question = int(question)
 
         return question
@@ -166,5 +185,7 @@ def main():
     calculate.expenses()
 
     calculate.cash_flow()
+
+    calculate.coc_return()
 
 main()
