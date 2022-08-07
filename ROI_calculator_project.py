@@ -74,8 +74,9 @@ Please respond with "yes" or "no"\n
 
         elif add_rent == 'no':
             os.system("cls")
+            self.rent_income = rent
 
-        self.rent_income = rent
+
         print(f"""
 ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
 \tYour total monthly rental income is: ${self.rent_income:.2f}
@@ -155,13 +156,32 @@ Please respond with "yes" or "no"\n
 
         print("You've made it to the final step! Now let's go over your rental property investments.\n")
 
-        down_pymt = self.user_input('down payment', 'initial')
+        down_pymt = self.user_input('down', 'payment', 'initial')
+        os.system("cls")
+
+        closing_cost = self.user_input('closing', 'costs', 'initial')
+        os.system("cls")
+
+        rehab = self.user_input('rehab', 'budget', 'initial')
+        os.system("cls")
+
+        misc_inv = self.user_input('miscellaneous', 'expense', 'initial')
+        os.system("cls")
+
+        self.rent_coc_return = sum([down_pymt, closing_cost, rehab, misc_inv])
+
+        print(f"""
+••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+\tYour total rental property investment is: ${self.rent_coc_return:.2f}
+••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+        """)
+
 
 
     def edit():
         pass
     
-    def user_input(self, first_value, frequency = 'monthly', sec_value = 'amount'):
+    def user_input(self, first_value, sec_value = 'amount', frequency = 'monthly'):
     # I started to realize I'm typing the same input over and over again, I decided
     # to make a method to call the inputs instead and insert the two parameters
     # that change with each question... let's see how it goes
