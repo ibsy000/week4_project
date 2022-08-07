@@ -50,8 +50,8 @@ Do you have any additional rental income from laundry services, storage fees, or
 other miscellaneous rental income?
 
 Please respond with "yes" or "no"\n
-""")
-            add_rent = add_rent.lower().strip()
+""").lower().strip()
+            # add_rent = add_rent.lower().strip()
             # os.system("cls")
 
             if add_rent == 'yes':
@@ -68,7 +68,7 @@ Please respond with "yes" or "no"\n
                 misc = self.user_input('misc. rental', 'income')
                 self.rent_income += misc
                 os.system("cls")
-
+                
                 print(f"""
 ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
 \tYour total monthly rental income is ${self.rent_income:.2f}
@@ -99,17 +99,39 @@ Please respond with "yes" or "no"\n
         # mortgage = int(mortgage)
 
         # this is when I realized I need a method to ask the question over and over
-        mortgage = self.user_input('mortgage', 'amount')
-        self.rent_exp += mortgage
+        mortgage = self.user_input('mortgage')
+        # self.rent_exp += mortgage  <----- I had this after each input....
         os.system("cls")
 
-        taxes = self.user_input('tax', 'amount')
-        self.rent_exp += taxes
+        taxes = self.user_input('tax')
         os.system("cls")
 
-        
-        
+        insurance = self.user_input('insurance')
+        os.system("cls")
 
+        hoa = self.user_input('HOA', 'fees')
+        os.system("cls")
+        
+        lawn_snow = self.user_input('lawn/snow', 'service(s)')
+        os.system("cls")
+
+        vacancy = self.user_input('vacancy')
+        os.system("cls")
+
+        repairs = self.user_input('repair')
+        os.system("cls")
+
+        cap_ex = self.user_input('capital expenditure')
+        os.system("cls")
+
+        prop_mgm = self.user_input('property management', 'expense')
+        os.system("cls")
+
+        # I realized I kept adding to self.rent_exp over and over again after
+        # each question so I tested if I could get the sum of all the inputs
+        # I tried first to get the sum of a set, but that didn't work so I 
+        # changed it to a list and it worked!
+        self.rent_exp = sum([mortgage, taxes, insurance, hoa, lawn_snow, vacancy, repairs, cap_ex, prop_mgm])
 
     def cash_flow(self):
         pass
@@ -125,7 +147,7 @@ Please respond with "yes" or "no"\n
     # I started to realize I'm typing the same input over and over again, I decided
     # to make a method to call the inputs instead and insert the two parameters
     # that change with each question... let's see how it goes
-    def user_input(self, first_value, sec_value):
+    def user_input(self, first_value, sec_value = 'amount'):
         
         question = input(f"How much is your monthly {first_value} {sec_value}?\n")
         question = int(question)
