@@ -49,10 +49,13 @@ other miscellaneous rental income?
 
 Please respond with "yes" or "no"\n
 """).lower().strip()
-            # add_rent = add_rent.lower().strip()
-            # os.system("cls")
 
-            if add_rent == 'yes':
+            if add_rent not in {'yes', 'no'}:
+
+                print("I'm sorry that is not a valid response...")
+                os.system("cls")
+                
+            elif add_rent == 'yes':
                 os.system("cls")
 
                 laundry = self.user_input('laundry', 'services')
@@ -65,28 +68,23 @@ Please respond with "yes" or "no"\n
                 os.system("cls")
                 
                 self.rent_income = sum([rent, laundry, storage, misc])
-
+# ***********FIGURE OUT HOW TO NOT HAVE TO TYPE THIS TWICE************
                 print(f"""
 ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
 \tYour total monthly rental income is ${self.rent_income:.2f}
 ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
                 """)
-
                 break
 
             elif add_rent == 'no':
                 os.system("cls")
-
+# ***********FIGURE OUT HOW TO NOT HAVE TO TYPE THIS TWICE************
                 print(f"""
 ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
 \tYour total monthly rental income is ${self.rent_income:.2f}
 ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
                 """)
-
                 break
-
-            else:
-                print("I'm sorry that is not a valid response...")
 
     def expenses(self):
         
@@ -129,6 +127,12 @@ Please respond with "yes" or "no"\n
         # I tried first to get the sum of a set, but that didn't work so I 
         # changed it to a list and it worked!
         self.rent_exp = sum([mortgage, taxes, insurance, hoa, lawn_snow, vacancy, repairs, cap_ex, prop_mgm])
+
+        print(f"""
+••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+\tYour total monthly rental expenses is ${self.rent_exp:.2f}
+••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+                """)
 
     def cash_flow(self):
         pass
