@@ -13,11 +13,12 @@ import time
 class ROI:
     
 
-    def __init__(self, rent_income = 0, rent_exp = 0, rent_cashflow = 0, rent_coc_return = 0):
+    def __init__(self, rent_income = 0, rent_exp = 0, rent_cashflow = 0, rent_invest = 0, rent_coc_return = 0):
 
         self.rent_income = rent_income
         self.rent_exp = rent_exp
         self.rent_cashflow = rent_cashflow
+        self.rent_invest = rent_invest
         self.rent_coc_return = rent_coc_return
 
 
@@ -141,12 +142,12 @@ Please respond with "yes" or "no"\n
         time.sleep(3)
 
         cf_monthly = self.rent_income - self.rent_exp
-        rent_cashflow = cf_monthly * 12
+        self.rent_cashflow = cf_monthly * 12
 
         print(f"""
 ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
 \tYour total monthly cashflow is: ${cf_monthly:.2f}
-\tYour total annual cashflow is: ${rent_cashflow:.2f}
+\tYour total annual cashflow is: ${self.rent_cashflow:.2f}
 ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
         """)
         
@@ -168,13 +169,27 @@ Please respond with "yes" or "no"\n
         misc_inv = self.user_input('miscellaneous', 'expense', 'initial')
         os.system("cls")
 
-        self.rent_coc_return = sum([down_pymt, closing_cost, rehab, misc_inv])
+        self.rent_invest = sum([down_pymt, closing_cost, rehab, misc_inv])
 
         print(f"""
 ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
-\tYour total rental property investment is: ${self.rent_coc_return:.2f}
+\tYour total rental property investment is: ${self.rent_invest:.2f}
 ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
         """)
+
+        self.rent_coc_return = (self.rent_cashflow / self.rent_invest) * 100
+        self.rent_coc_return = round(self.rent_coc_return, 2) # neat round function
+
+        print("Thank you! Now let's calculate your cash on cash return rate...")
+        time.sleep(3)
+
+        print(f"""
+••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+\tYour rental property cash on cash return is: {self.rent_coc_return}%
+••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+        """)
+        time.sleep(4)
+        os.system("cls")
 
 
 
