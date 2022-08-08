@@ -123,11 +123,69 @@ Please respond with "yes" or "no"\n
         prop_mgm = self.user_input('property management', 'expense')
         os.system("cls")
 
+
+        utilities = input("""
+Do you have any additional expenses such as water/sewer, garbage, electric, or gas?
+
+Please respond with "yes" or "no"\n
+""").lower().strip()
+        os.system("cls")
+
+
+        while utilities not in {'yes', 'no'}:
+
+            utilities = input('I\'m sorry that is not a valid response...\nPlease respond with "yes" or "no"\n')
+            os.system("cls")
+        
+        if utilities == 'yes':
+
+            water = self.user_input('water', 'bill')
+            os.system("cls")
+
+            sewer = self.user_input('sewer', 'bill')
+            os.system("cls")
+
+            garbage = self.user_input('garbage', 'bill')
+            os.system("cls")
+
+            electric = self.user_input('electric', 'bill')
+            os.system("cls")
+
+            gas = self.user_input('gas', 'bill')
+            os.system("cls")
+
+            self.rent_exp = sum([
+                mortgage,
+                taxes,
+                insurance,
+                hoa,
+                lawn_snow,
+                vacancy,
+                repairs,
+                cap_ex,
+                prop_mgm,
+                water,
+                sewer,
+                garbage,
+                electric,
+                gas])
+
+        elif utilities == 'no':
+            os.system("cls")
         # I realized I kept adding to self.rent_exp over and over again after
         # each question so I tested if I could get the sum of all the inputs
         # I tried first to get the sum of a set, but that didn't work so I 
         # changed it to a list and it worked!
-        self.rent_exp = sum([mortgage, taxes, insurance, hoa, lawn_snow, vacancy, repairs, cap_ex, prop_mgm])
+            self.rent_exp = sum([
+                mortgage,
+                taxes,
+                insurance,
+                hoa,
+                lawn_snow,
+                vacancy,
+                repairs,
+                cap_ex,
+                prop_mgm])
 
         print(f"""
 ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
