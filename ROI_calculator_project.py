@@ -13,11 +13,12 @@ import time
 class ROI:
     
 
-    def __init__(self, rent_income = 0, rent_exp = 0, rent_cashflow = 0, rent_invest = 0, rent_coc_return = 0):
+    def __init__(self, rent_income = 0, rent_exp = 0, cf_monthly = 0, cf_annual = 0, rent_invest = 0, rent_coc_return = 0):
 
         self.rent_income = rent_income
         self.rent_exp = rent_exp
-        self.rent_cashflow = rent_cashflow
+        self.cf_monthly = cf_monthly
+        self.cf_annual = cf_annual
         self.rent_invest = rent_invest
         self.rent_coc_return = rent_coc_return
 
@@ -141,13 +142,13 @@ Please respond with "yes" or "no"\n
         print("You're almost done! Let's calculate your cash flow...\n")
         time.sleep(3)
 
-        cf_monthly = self.rent_income - self.rent_exp
-        self.rent_cashflow = cf_monthly * 12
+        self.cf_monthly = self.rent_income - self.rent_exp
+        self.cf_annual = self.cf_monthly * 12
 
         print(f"""
 ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
-\tYour total monthly cashflow is: ${cf_monthly:.2f}
-\tYour total annual cashflow is: ${self.rent_cashflow:.2f}
+\tYour total monthly cashflow is: ${self.cf_monthly:.2f}
+\tYour total annual cashflow is: ${self.cf_annual:.2f}
 ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
         """)
         
@@ -177,7 +178,7 @@ Please respond with "yes" or "no"\n
 ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
         """)
 
-        self.rent_coc_return = (self.rent_cashflow / self.rent_invest) * 100
+        self.rent_coc_return = (self.cf_annual / self.rent_invest) * 100
         self.rent_coc_return = round(self.rent_coc_return, 2) # neat round function
 
         print("Thank you! Now let's calculate your cash on cash return rate...")
@@ -188,13 +189,35 @@ Please respond with "yes" or "no"\n
 \tYour rental property cash on cash return is: {self.rent_coc_return}%
 ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
         """)
-        time.sleep(4)
+        time.sleep(5)
         os.system("cls")
 
 
 
     def summary(self):
-        pass
+        
+        print("Printing summary report...")
+        time.sleep(3)
+
+        print(f"""
+••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+\t\tRental Property ROI Calculator Summary Report
+``````````````````````````````````````````````````````````````````````
+
+Total Monthly Income _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _${self.rent_income:.2f}
+
+Total Monthly Expenses _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _${self.rent_exp:.2f}
+
+Total Monthly Cashflow _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _${self.cf_monthly:.2f}
+
+Total Annual Cashflow _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ ${self.cf_annual:.2f}
+
+Total Initial Investment _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _${self.rent_invest:.2f}
+
+``````````````````````````````````````````````````````````````````````
+Rental Property Cash on Cash Return _ _ _ _ _ _ _ _ _ _ _ _{self.rent_coc_return}%
+••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+""")
 
 
 
@@ -227,5 +250,7 @@ def main():
     calculate.cash_flow()
 
     calculate.coc_return()
+
+    calculate.summary()
 
 main()
