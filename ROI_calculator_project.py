@@ -12,7 +12,7 @@ import time
 
 class ROI:
     
-
+    # I can't remember how to print on multiple lines without breaking 
     def __init__(self, rent_income = 0, rent_exp = 0, cf_monthly = 0, cf_annual = 0, rent_invest = 0, rent_coc_return = 0):
 
         self.rent_income = rent_income
@@ -279,9 +279,30 @@ Rental Property Cash on Cash Return _ _ _ _ _ _ _ _ _ _ _ _{self.rent_coc_return
 
 
 
-    def edit():
-        pass
-    
+    def edit(self):
+        
+        edit_what = input("Which section would you like to edit? Type 'income' or 'expenses'\n")
+        os.system("cls")
+
+        while edit_what not in {'income', 'expenses'}:
+
+            edit_what = input("I'm sorry that is not a valid reponse. Type 'income' or 'expenses'\n")
+            os.system("cls")
+        
+        if edit_what == 'income':
+
+            self.income()
+            self.cash_flow()
+            self.coc_return()
+            self.summary()
+
+        elif edit_what == 'expenses':
+
+            self.expenses()
+            self.cash_flow()
+            self.coc_return()
+            self.summary()
+
 
 
     def user_input(self, first_value, sec_value = 'amount', frequency = 'monthly'):
@@ -293,6 +314,7 @@ Rental Property Cash on Cash Return _ _ _ _ _ _ _ _ _ _ _ _{self.rent_coc_return
         question = int(question)
 
         return question
+
 
 
 def main():
