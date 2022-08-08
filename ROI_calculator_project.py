@@ -212,7 +212,7 @@ Please respond with "yes" or "no"\n
         
 
 
-    def coc_return(self):
+    def investments(self):
 
         print("You've made it to the final step! Now let's go over your rental property investments.\n")
 
@@ -235,6 +235,10 @@ Please respond with "yes" or "no"\n
 \tYour total rental property investment is: ${self.rent_invest:.2f}
 ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
         """)
+
+
+
+    def coc_return(self):
 
         self.rent_coc_return = (self.cf_annual / self.rent_invest) * 100
         self.rent_coc_return = round(self.rent_coc_return, 2) # neat round function
@@ -281,12 +285,12 @@ Rental Property Cash on Cash Return _ _ _ _ _ _ _ _ _ _ _ _{self.rent_coc_return
 
     def edit(self):
         
-        edit_what = input("Which section would you like to edit? Type 'income' or 'expenses'\n")
+        edit_what = input("Which section would you like to edit? Type 'income', 'expenses', or 'investments'\n")
         os.system("cls")
 
-        while edit_what not in {'income', 'expenses'}:
+        while edit_what not in {'income', 'expenses', 'investments'}:
 
-            edit_what = input("I'm sorry that is not a valid reponse. Type 'income' or 'expenses'\n")
+            edit_what = input("I'm sorry that is not a valid reponse. Type 'income', 'expenses', or 'investments'\n")
             os.system("cls")
         
         if edit_what == 'income':
@@ -299,6 +303,13 @@ Rental Property Cash on Cash Return _ _ _ _ _ _ _ _ _ _ _ _{self.rent_coc_return
         elif edit_what == 'expenses':
 
             self.expenses()
+            self.cash_flow()
+            self.coc_return()
+            self.summary()
+
+        elif edit_what == 'investments':
+
+            self.investments()
             self.cash_flow()
             self.coc_return()
             self.summary()
@@ -330,6 +341,8 @@ def main():
     calculate.expenses()
 
     calculate.cash_flow()
+
+    calculate.investments()
 
     calculate.coc_return()
 
