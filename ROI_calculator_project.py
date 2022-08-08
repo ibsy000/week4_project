@@ -282,6 +282,8 @@ Rental Property Cash on Cash Return _ _ _ _ _ _ _ _ _ _ _ _{self.rent_coc_return
     def edit():
         pass
     
+
+
     def user_input(self, first_value, sec_value = 'amount', frequency = 'monthly'):
     # I started to realize I'm typing the same input over and over again, I decided
     # to make a method to call the inputs instead and insert the two parameters
@@ -310,5 +312,36 @@ def main():
     calculate.coc_return()
 
     calculate.summary()
+
+    while True:
+
+        now_what = input("""
+Well that was fun! What would you like to do now?
+
+--> Type 'edit' if you would like to alter your results.
+--> Type 'done' if you're done calculating!\n
+""")
+        os.system("cls")
+
+
+        while now_what not in {'edit', 'done'}:
+
+            now_what = input("I'm sorry that is not a valid response. Please type 'edit' or 'done'\n")
+            os.system("cls")
+
+        if now_what == 'edit':
+
+            calculate.edit()
+
+        elif now_what == 'done':
+            break
+        
+    print("""
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+\tThank you for using ROI Calculator for your rental property.
+
+\t\t\tCome back again!
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+""")
 
 main()
